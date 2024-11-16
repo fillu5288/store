@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login page</title>
+    <style>
+        .btn {
+            display: inline-block; /* Строчно-блочный элемент */
+            background: #8C959D; /* Серый цвет фона */
+            color: #000000; /* Белый цвет текста */
+            padding: 1rem 1.5rem; /* Поля вокруг текста */
+            text-decoration: none; /* Убираем подчёркивание */
+            border-radius: 3px; /* Скругляем уголки */
+        }
+
+        .position-reg {position: fixed;
+            top: 45%;
+            left: 45%;
+        }
+
+        .position-log {position: fixed;
+            top: 40%;
+            left: 45%;
+        }
+
+        .position-err {position: fixed;
+            top: 35%;
+            left: 45%;
+        }
+
+        body {background: #a9a9a9;}
+    </style>
+</head>
+<body>
+
+<form name="login" method="post" action="/process_login">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <label for="email">Введите почту:</label>
+    <input type="email" name="email" id="email">
+    <br/>
+    <label for="username">Введите имя:</label>
+    <input type="username" name="username" id="username">
+    <br/>
+    <label for="password">Введите пароль:</label>
+    <input type="password" name="password" id="password">
+    <br/>
+    <input type="submit" value="Войти" class="btn position-log">
+    <div th:if="${param.error}" style="color: red" class="btn position-err">
+        Неверная почта или пароль
+    </div>
+    <br/>
+    <a href="/auth/registration" class="btn position-reg" >Регистрация</a>
+</form>
+
+</body>
+</html>
