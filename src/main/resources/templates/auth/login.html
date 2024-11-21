@@ -4,52 +4,76 @@
     <meta charset="UTF-8">
     <title>Login page</title>
     <style>
-        .btn {
+        body {
+            background: #0d0d0e;
+        }
+
+        .reg-button {
             display: inline-block; /* Строчно-блочный элемент */
             background: #8C959D; /* Серый цвет фона */
-            color: #000000; /* Белый цвет текста */
-            padding: 1rem 1.5rem; /* Поля вокруг текста */
+            padding: 1rem 2.5rem; /* Поля вокруг текста */
             text-decoration: none; /* Убираем подчёркивание */
-            border-radius: 3px; /* Скругляем уголки */
+            border-radius: 12px; /* Скругляем уголки */
+            position: fixed; /* как крепиться */
+            top: 50%; /* вертикаль */
+            left: 46.5%; /* горизонталь */
         }
 
-        .position-reg {position: fixed;
-            top: 45%;
-            left: 45%;
+        .login-button {
+            display: inline-block;
+            background: #8C959D;
+            padding: 1rem 3.9rem;
+            text-decoration: none;
+            border-radius: 12px;
+            position: fixed;
+            top: 44%;
+            left: 46.5%;
         }
 
-        .position-log {position: fixed;
+        .password-form {
+            position: fixed;
             top: 40%;
-            left: 45%;
+            left: 46.1%;
         }
 
-        .position-err {position: fixed;
-            top: 35%;
-            left: 45%;
+        .username-form {
+            position: fixed;
+            top: 37%;
+            left: 46.1%;
         }
 
-        body {background: #a9a9a9;}
+        .white-text {
+            color: #ffffff; /* Белый цвет текста */
+        }
+
+        .err-message {
+            display: inline-block;
+            background: #4d1b18;
+            padding: 1rem 3.9rem;
+            text-decoration: none;
+            border-radius: 12px;
+            position: fixed;
+            top: 36.8%;
+            left: 62%;
+        }
+
     </style>
 </head>
 <body>
 
 <form name="login" method="post" action="/process_login">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-    <label for="email">Введите почту:</label>
-    <input type="email" name="email" id="email">
     <br/>
-    <label for="username">Введите имя:</label>
-    <input type="username" name="username" id="username">
+    <input type="text" class="username-form" name="username" placeholder="Электронная почта" id="username">
     <br/>
-    <label for="password">Введите пароль:</label>
-    <input type="password" name="password" id="password">
+    <input type="password" class="password-form" name="password" placeholder="Пароль" id="password">
     <br/>
-    <input type="submit" value="Войти" class="btn position-log">
-    <div th:if="${param.error}" style="color: red" class="btn position-err">
+    <input type="submit" value="Войти" class="login-button white-text">
+    <div th:if="${param.error}" style="color: #e87d79">
         Неверная почта или пароль
     </div>
     <br/>
-    <a href="/auth/registration" class="btn position-reg" >Регистрация</a>
+    <a href="/auth/registration" class="reg-button white-text" >Регистрация</a>
 </form>
 
 </body>
